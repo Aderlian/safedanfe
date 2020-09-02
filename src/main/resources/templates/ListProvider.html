@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+<link href="/css/estilo.css" rel="stylesheet">
+<script src="/bootstrap/jquery/jquery-3.0.0.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<title>SafeDanfe</title>
+</head>
+<body>
+
+	<h1>Lista De Fornecedor</h1>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Razão Sócial</th>
+				<th scope="col">CNPJ</th>
+				<th scope="col">Cidade</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Editar</th>
+			</tr>
+		</thead>
+		<tr th:each="provider : ${providerAll}">
+			<td><span th:text="${provider.id}"></span></td>
+			<td><span th:text="${provider.name}"></span></td>
+			<td><span th:text="${provider.cnpj}"></span></td>
+			<td><span th:text="${provider.city}"></span></td>
+			<td><span th:text="${provider.estado}"></span></td>
+			<td><a class="btn btn-primary" th:href="@{/providers/} + ${provider.id}">...</a></td>
+		</tr>
+
+
+	</table>
+	<a class="btn btn-primary" th:href="@{/providers/form}">Cadastrar</a>
+	
+
+</body>
+</html>
