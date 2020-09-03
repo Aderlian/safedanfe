@@ -9,36 +9,32 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <title>SafeDanfe</title>
 </head>
-<body>
-	<h1>Lista De Danfes</h1>
+<body class="container">
+	<div th:insert="fragments/header.html"></div>
+	<p class="display-3 text-center">Notas Fiscais</p>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">Código</th>
-				<th scope="col">Numero NFE</th>
-				<th scope="col">Fornecedor Codigo</th>
-				<th scope="col">Fornecedor Nome</th>
-				<th scope="col">Empresa codigo</th>
-				<th scope="col">Empresa Nome</th>
+				<th scope="col">Número da NFE</th>
+				<th scope="col">Nome do fornecedor</th>
+				<th scope="col">Código da empresa</th>
+				<th scope="col">Nome da empresa</th>
 				<th scope="col">Valor Total</th>
-				<th scope="col">Chave Acesso</th>
-				<th scope="col">Data Emissao</th>
-				<th scope="col">Data Inportação</th>
-				<th scope="col">Editar</th>
+				<th scope="col">Data da emissão</th>
+				<th scope="col">Visualizar</th>
 			</tr>
 		</thead>
 		<tr th:each="danfe : ${danfeAll}">
 			<td><span th:text="${danfe.id}"></span></td>
 			<td><span th:text="${danfe.numberNFE}"></span></td>
-			<td><span th:text="${danfe.provider.id}"></span></td>
 			<td><span th:text="${danfe.provider.name}"></span></td>
 			<td><span th:text="${danfe.company.id}"></span></td>
 			<td><span th:text="${danfe.company.fantasyName}"></span></td>
 			<td><span th:text="${danfe.amount}"></span></td>
-			<td><span th:text="${danfe.keyNFE}"></span></td>
 			<td><span th:text="${danfe.issuanceDate}"></span></td>
-			<td><span th:text="${danfe.creationDate}"></span></td>
-			<td><a class="btn btn-primary" th:href="@{/danfes/} + ${danfe.id}">...</a></td>
+			<td><a class="btn btn-primary"
+				th:href="@{/danfes/} + ${danfe.id}">...</a></td>
 		</tr>
 
 

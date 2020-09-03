@@ -3,35 +3,32 @@
 <head>
 <meta charset="UTF-8"></meta>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.css">
 <link href="/css/estilo.css" rel="stylesheet">
 <script src="/bootstrap/jquery/jquery-3.0.0.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <title>SafeDanfe</title>
 </head>
-<body>
-	<h1>TESTE</h1>
-	<span th:text="${user.id}"></span>
+<body class="container">
+	<div th:insert="fragments/header.html"></div>
 	<form>
 		<div class="form-group">
 			<label>Código</label> <input type="text" class="form-control"
-				name="id" 
-				th:value="${user.id}">
+				name="id" th:value="${user.id}">
 		</div>
 		<div class="form-group">
-			<label>Nome do usuario</label> <input type="text"
-				class="form-control" name="name" placeholder="Nome do usuario"
+			<label>Nome do usuário</label> <input type="text"
+				class="form-control" name="name" placeholder="Nome do usuário"
 				th:value="${user.name}">
 		</div>
 		<div class="form-group">
-			<label>Senha</label> <input type="password"
-				class="form-control" name="password" placeholder="Insira a senha"
+			<label>Senha</label> <input type="password" class="form-control"
+				name="password" placeholder="Insira a senha"
 				th:value="${user.password}">
 		</div>
 		<div class="form-group">
-			<label>Tipo</label> <input type="text"
-				class="form-control" name="permission"
-				th:value="${user.permission}">
+			<label>Tipo</label> <input type="text" class="form-control"
+				name="permission" th:value="${user.permission}">
 		</div>
 		<br>
 		<button th:formaction="@{/users}" formmethod="POST" type="submit"

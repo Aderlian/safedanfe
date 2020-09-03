@@ -3,35 +3,38 @@
 <head>
 <meta charset="UTF-8"></meta>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.css">
 <link href="/css/estilo.css" rel="stylesheet">
 <script src="/bootstrap/jquery/jquery-3.0.0.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <title>SafeDanfe</title>
 </head>
-<body>
-	<h1>TESTE</h1>
-	<span th:text="${companyID.id}"></span>
+<body class="container">
+	<div th:insert="fragments/header.html"></div>
 	<form>
 		<div class="form-group">
-			<label>Código</label> <input
-				type="text" class="form-control" name="id" placeholder="Nome do fornecedor" th:value="${companyID.id}">
+			<label>Código</label> <input type="text" class="form-control"
+				name="id"
+				th:value="${companyID.id}">
 		</div>
 		<div class="form-group">
-			<label>Razão Social</label> <input
-				type="text" class="form-control" name="fantasyName" placeholder="Nome da empresa" th:value="${companyID.fantasyName}">
+			<label>Razão Social</label> <input type="text" class="form-control"
+				name="fantasyName" 
+				th:value="${companyID.fantasyName}">
 		</div>
 		<div class="form-group">
-			<label>CNPJ</label> <input
-				type="text" class="form-control" name="cnpj" placeholder="CNPJ" th:value="${companyID.cnpj}">
+			<label>CNPJ</label> <input type="text" class="form-control"
+				name="cnpj" th:value="${companyID.cnpj}">
 		</div>
 		<div class="form-group">
-			<label>Pasta</label> <input
-				type="text" class="form-control" name="filePath" placeholder="Pasta" th:value="${companyID.filePath}">
+			<label>Pasta</label> <input type="text" class="form-control"
+				name="filePath" th:value="${companyID.filePath}">
 		</div>
 		<br>
-		<button th:formaction="@{/companys}" formmethod="POST" type="submit"  class="btn btn-primary">Salvar</button>
-		<button th:formaction="@{/companys/delete/} + ${companyID.id}" formmethod="GET" type="submit" class="btn btn-primary">Deletar</button>
+		<button th:formaction="@{/companys}" formmethod="POST" type="submit"
+			class="btn btn-primary">Salvar</button>
+		<button th:formaction="@{/companys/delete/} + ${companyID.id}"
+			formmethod="GET" type="submit" class="btn btn-primary">Deletar</button>
 	</form>
 </body>
 </html>

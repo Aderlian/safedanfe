@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8"></meta>
 <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="/fontawesome/css/all.css">
 <link href="/css/estilo.css" rel="stylesheet">
 <script src="/bootstrap/jquery/jquery-3.0.0.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <title>SafeDanfe</title>
 </head>
-<body>
-
-	<h1>Lista De Empresa</h1>
+<body class="container">
+	<div th:insert="fragments/header.html"></div>
+	<p class="display-3 text-center">Empresas</p>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">Código</th>
-				<th scope="col">Razão Sócial</th>
+				<th scope="col">Razão Social</th>
 				<th scope="col">CNPJ</th>
 				<th scope="col">Pasta</th>
 				<th scope="col">Editar</th>
@@ -27,13 +27,14 @@
 			<td><span th:text="${company.fantasyName}"></span></td>
 			<td><span th:text="${company.cnpj}"></span></td>
 			<td><span th:text="${company.filePath}"></span></td>
-			<td><a class="btn btn-primary" th:href="@{/companys/} + ${company.id}">...</a></td>
+			<td><a class="btn btn-primary"
+				th:href="@{/companys/} + ${company.id}">...</a></td>
 		</tr>
 
 
 	</table>
 	<a class="btn btn-primary" th:href="@{/companys/form}">Cadastrar</a>
-	
+
 
 </body>
 </html>
