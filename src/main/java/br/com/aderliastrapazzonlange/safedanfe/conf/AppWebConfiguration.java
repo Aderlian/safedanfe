@@ -2,10 +2,10 @@ package br.com.aderliastrapazzonlange.safedanfe.conf;
 
 public class AppWebConfiguration {
 	
-	private static final String fileRootPath = "/home/aderlian/Downloads/XML/origem";
-	private static final String filePathXML = "/home/aderlian/Downloads/XML/origem";
-	private static final String filePathOther = "/home/aderlian/Downloads/XML/xmlOther/";
-	private static final String filePathBKP = "/home/aderlian/Downloads/XML/xmlBKP/";
+	private static final String fileRootPath = "/home/aderlian/Downloads/XML/";
+	private static final String filePathXML = "origem/";
+	private static final String filePathOther = "xmlOther/";
+	private static final String filePathBKP = "xmlBKP/";
 	private static final String filePathError = "error/";
 	private static final String syncTime = "60";
 	private static final String jpaContextual = "true";

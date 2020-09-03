@@ -44,8 +44,13 @@ public class XmlServer {
 		NodeList emit = document.getElementsByTagName("emit");
 		System.out.println("tamanho do retorno provider: " + emit.getLength());
 		Element el = (Element) emit.item(0);
-		String cnpj = el.getElementsByTagName("CNPJ").item(0).getTextContent();
-
+		String cnpj = null;
+		if(el.getElementsByTagName("CNPJ").item(0) !=null) {
+			cnpj = el.getElementsByTagName("CNPJ").item(0).getTextContent();
+		}else if(el.getElementsByTagName("CPF").item(0) !=null) {
+			cnpj = el.getElementsByTagName("CPF").item(0).getTextContent();
+		}
+		System.out.println("conteudo da variavel cnpj: " + cnpj);
 		Optional<Provider> opt = providerRepository.findByCnpj(cnpj);
 
 		if (!opt.isEmpty()) {
@@ -79,7 +84,7 @@ public class XmlServer {
 		if (!opt.isEmpty()) {
 			company = opt.get();
 		} else {
-			company.setFilePath(AppWebConfiguration.getFilepathother());
+			company.setFilePath(AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepathother());
 		}
 
 		return company;

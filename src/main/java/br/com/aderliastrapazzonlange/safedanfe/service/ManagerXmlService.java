@@ -30,9 +30,10 @@ public class ManagerXmlService {
 
 	public void start() {
 		while (true) {
-
+			
 			System.out.println("Interando no inicio Start... ");
-			File rootPath = new File(AppWebConfiguration.getFilerootpath());
+			System.out.println("diretorio a ser lido "+ AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathxml());
+			File rootPath = new File(AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathxml());
 			File[] paths = rootPath.listFiles();
 			System.out.println("antes do for " + paths.length);
 			if (paths.length == 0) {
@@ -55,7 +56,8 @@ public class ManagerXmlService {
 					System.out.println(provider.getName());
 					Company company = xmlServer.companyXml(document, companyRepository);
 					if (company.getId() == 0) {
-						xmlServer.saveXml(AppWebConfiguration.getFilepathother(), path);
+						System.out.println("Salvar arquivo em outros "+AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathother());
+						xmlServer.saveXml(AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathother(), path);
 						xmlServer.deleteXml(path);
 						System.out.println("Não existe empresa cadastrada!!! ");
 						return;
@@ -66,7 +68,7 @@ public class ManagerXmlService {
 						danfeRepository.save(danfe);
 						String companyPath = danfe.getCompany().getFilePath() + danfe.getProvider().getName() + "-"
 								+ danfe.getNumberNFE() + ".xml";
-						String bkpPath = AppWebConfiguration.getFilepathbkp() + danfe.getKeyNFE() + ".xml";
+						String bkpPath = AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepathbkp() + danfe.getKeyNFE() + ".xml";
 						File filePath = path;
 						xmlServer.saveXml(companyPath, filePath);
 						xmlServer.saveXml(bkpPath, filePath);
@@ -81,9 +83,10 @@ public class ManagerXmlService {
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("Catch 4");
+					System.out.println("Catch 4 " + e.toString());
 					try {
-						xmlServer.saveXml(AppWebConfiguration.getFilepathother() + path.getName(), path);
+						System.out.println("salvando arquivo erro " +AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepatherror() + path.getName());
+						xmlServer.saveXml(AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepatherror() + path.getName(), path);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
