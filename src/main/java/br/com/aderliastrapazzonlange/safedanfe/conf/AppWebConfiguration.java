@@ -7,7 +7,6 @@ public class AppWebConfiguration {
 	private static final String filePathOther = "xmlOther/";
 	private static final String filePathBKP = "xmlBKP/";
 	private static final String filePathError = "error/";
-	private static final String syncTime = "60";
 	private static final String jpaContextual = "true";
 	private static final String jpaDriverClass = "com.mysql.cj.jdbc.Driver";
 	private static final String jpaURL = "jdbc:mysql://localhost:3306/safedanfe";
@@ -26,9 +25,6 @@ public class AppWebConfiguration {
 	}
 	public static String getFilepathbkp() {
 		return filePathBKP;
-	}
-	public static String getSynctime() {
-		return syncTime;
 	}
 	public static String getJpacontextual() {
 		return jpaContextual;

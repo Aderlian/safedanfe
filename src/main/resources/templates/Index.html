@@ -15,35 +15,37 @@
 		<div>
 			<ul class="nav justify-content-end">
 				<li class="nav-item"><a
-					class="nav-link fab fa-youtube-square icones"
-					href="https://www.youtube.com/channel/UCmo3UZIxn6j36shckqSRk8A"></a></li>
+					class="nav-link fab fa-youtube-square icones" href="#"></a></li>
 				<li class="nav-item"><a
 					class="nav-link fab fa-github-square icones"
-					href="https://github.com/Aderlian"></a></li>
+					href="https://github.com/Aderlian/safedanfe"></a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="row alert alert-primary centraliza">
-		<!-- Logo Marca Do Projeto  -->
-		<div class="col-5">
-			<img alt="" src="https://picsum.photos/id/1079/900/500">
-		</div>
-		<!-- Formulario de login  -->
-		<div class="col-7">
-			<form action="/login" method="POST">
-				<div class="form-group">
-					<label for="User">Usuario do sistema</label> <input type="text"
-						class="form-control" name="name" aria-describedby="Usuario"
-						placeholder="Seu usuario">
-				</div>
-				<div class="form-group">
-					<label for="Password">Senha</label> <input type="password"
-						class="form-control" name="password" placeholder="Senha">
-				</div>
-				<button type="submit" class="btn btn-primary">Entrar</button>
-			</form>
-		</div>
-
+	<!-- Logo Marca Do Projeto  -->
+	<div class="col-5">
+		<img alt="" src="https://picsum.photos/id/1079/900/500">
+	</div>
+	<!-- Formulario de login  -->
+	<div class="col-7">
+		<form action="/dashboard" method="POST">
+			<div class="form-group">
+				<label for="User">Usuario do sistema</label> <input type="text"
+					class="form-control" name="name" aria-describedby="Usuario"
+					placeholder="Seu usuario" disabled="true">
+			</div>
+			<div class="form-group">
+				<label for="Password">Senha</label> <input type="password"
+					class="form-control" name="password" placeholder="Senha"
+					disabled="true">
+			</div>
+			<button type="submit" class="btn btn-primary">Entrar</button>
+		</form>
+	</div>
+	<div class="row alert alert-danger" role="alert">
+			<p>È uma versão de teste, o login não é necessario apenas clicar em entrar.</p>
+	</div>
 
 	</div>
 </body>
