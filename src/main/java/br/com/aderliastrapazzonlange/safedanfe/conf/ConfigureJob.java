@@ -25,7 +25,7 @@ public class ConfigureJob {
 	        return TriggerBuilder.newTrigger().forJob(jobADetails)
 
 	                .withIdentity("sampleTriggerA")
-	                .withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * ? * * *"))
+	                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * ? * * *"))
 	                .build();
 	    }
 }
