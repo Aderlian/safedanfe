@@ -82,7 +82,9 @@ public class XmlServer {
 		if (!opt.isEmpty()) {
 			company = opt.get();
 		} else {
-			company.setFilePath(AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepathother());
+			company.setFilePath(AppWebConfiguration.getFilerootpath() 
+					+ AppWebConfiguration.getFilepathother()
+					);
 		}
 
 		return company;
@@ -92,7 +94,7 @@ public class XmlServer {
 
 		NodeList node = document.getElementsByTagName("ide");
 		Element el = (Element) node.item(0);
-		String numberNFE = el.getElementsByTagName("nNF").item(0).getTextContent();
+		Long numberNFE = Long.parseLong(el.getElementsByTagName("nNF").item(0).getTextContent());
 		String dataEmissao = el.getElementsByTagName("dhEmi").item(0).getTextContent();
 		dataEmissao = dataEmissao.substring(0, 10);
 		LocalDate issuanceDate = LocalDate.parse(dataEmissao);

@@ -50,7 +50,7 @@ public class ManagerXmlService {
 					Provider provider = xmlServer.providerXml(document, providerRepository);
 					Company company = xmlServer.companyXml(document, companyRepository);
 					if (company.getId() == 0) {
-						xmlServer.saveXml(AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathother(), path);
+						xmlServer.saveXml(company.getFilePath()+path.getName(), path);
 						xmlServer.deleteXml(path);
 						return;
 					}

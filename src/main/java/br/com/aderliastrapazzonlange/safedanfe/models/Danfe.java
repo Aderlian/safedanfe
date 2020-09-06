@@ -27,7 +27,7 @@ public class Danfe implements Serializable {
 	@ManyToOne
 	private Provider provider;
 	@Column(nullable = false, name = "NUMBER_NFE")
-	private String numberNFE;
+	private Long numberNFE;
 	@Column(nullable = false, name = "KEY_NFE")
 	private String keyNFE;
 	@Column(nullable = false, name = "COMPANY")
@@ -44,7 +44,7 @@ public class Danfe implements Serializable {
 		this.provider = new Provider();
 	}
 
-	public Danfe(Company company, Provider provider, String numberNFE, String keyNFE, BigDecimal amount,
+	public Danfe(Company company, Provider provider, Long numberNFE, String keyNFE, BigDecimal amount,
 			LocalDate issuanceDate, LocalDate creationDate) {
 
 		this.company = company;
@@ -80,11 +80,11 @@ public class Danfe implements Serializable {
 		this.provider = provider;
 	}
 
-	public String getNumberNFE() {
+	public Long getNumberNFE() {
 		return numberNFE;
 	}
 
-	public void setNumberNFE(String numberNFE) {
+	public void setNumberNFE(Long numberNFE) {
 		this.numberNFE = numberNFE;
 	}
 
