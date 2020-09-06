@@ -12,6 +12,35 @@
 <body class="container">
 	<div th:insert="fragments/header.html"></div>
 	<p class="display-3 text-center">Notas Fiscais</p>
+	<br>
+	<div>
+		<form>
+			<div class="form-row">
+				<div class="col">
+					<label>Data início</label> <input type="date" name="dateIni" th:value="${dateStart}">
+				</div>
+				<div class="col">
+					<label>Data fim</label> <input type="date" name="dateFim" th:value="${dateEnd}">
+				</div>
+				<div class="col">
+					<label>Empresa</label>
+					<select id="exampleFormControlSelect1" name="company">
+						<option th:each="company : ${companyAll}"
+					th:value="${company.id}" th:text="${company.id}" 
+					th:selected="${companySelect} == ${company.id} ? 'true' : 'false' "></option>
+						
+						<option value="*" th:selected="${companySelect} == '*' ? 'true' : 'false' ">Todas</option>
+					</select>
+				</div>
+				<div class="col">
+				<button th:formaction="@{/danfes}"
+			formmethod="GET" type="submit" class="btn btn-primary">Filtrar</button>
+				</div>
+
+			</div>
+		</form>
+		<br>
+	</div>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
@@ -31,8 +60,9 @@
 			<td><span th:text="${danfe.provider.name}"></span></td>
 			<td><span th:text="${danfe.company.id}"></span></td>
 			<td><span th:text="${danfe.company.fantasyName}"></span></td>
-			<td><span th:text="${danfe.amount}"></span></td>
-			<td><span th:text="${danfe.issuanceDate}"></span></td>
+			<td><span th:text="${#numbers.formatCurrency(danfe.amount)}"></span></td>
+			<td><span
+				th:text="${#temporals.format(danfe.issuanceDate, 'dd/MM/yyyy')}"></span></td>
 			<td><a class="btn btn-primary"
 				th:href="@{/danfes/} + ${danfe.id}">...</a></td>
 		</tr>

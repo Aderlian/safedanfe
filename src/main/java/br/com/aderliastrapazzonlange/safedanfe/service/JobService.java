@@ -29,15 +29,12 @@ public class JobService implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		System.out.println("--------------------------INICIO-----------------------------------------------");
-		System.out.println("Teste do Quartz imprimindo hora : " + localDate);
-
+		System.out.println("--------------------------INICIO AS "+ LocalDateTime.now() +"-----------------------------------------------");
 		ManagerXmlService managerXmlService = new ManagerXmlService(providerRepository, companyRepository,
 				danfeRepository);
 		managerXmlService.start();
 		
-		System.out.println("--------------------------FIM--------------------------------------------------");
-
+		System.out.println("--------------------------FIM AS "+ LocalDateTime.now() +"--------------------------------------------------");
 	}
 
 }

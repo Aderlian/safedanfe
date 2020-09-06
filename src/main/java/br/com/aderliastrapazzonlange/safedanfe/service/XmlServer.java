@@ -42,7 +42,6 @@ public class XmlServer {
 
 	public Provider providerXml(Document document, ProviderRepository providerRepository) {
 		NodeList emit = document.getElementsByTagName("emit");
-		System.out.println("tamanho do retorno provider: " + emit.getLength());
 		Element el = (Element) emit.item(0);
 		String cnpj = null;
 		if(el.getElementsByTagName("CNPJ").item(0) !=null) {
@@ -50,7 +49,6 @@ public class XmlServer {
 		}else if(el.getElementsByTagName("CPF").item(0) !=null) {
 			cnpj = el.getElementsByTagName("CPF").item(0).getTextContent();
 		}
-		System.out.println("conteudo da variavel cnpj: " + cnpj);
 		Optional<Provider> opt = providerRepository.findByCnpj(cnpj);
 
 		if (!opt.isEmpty()) {
@@ -95,7 +93,6 @@ public class XmlServer {
 		NodeList node = document.getElementsByTagName("ide");
 		Element el = (Element) node.item(0);
 		String numberNFE = el.getElementsByTagName("nNF").item(0).getTextContent();
-		System.out.println("numero Nfe: " + numberNFE);
 		String dataEmissao = el.getElementsByTagName("dhEmi").item(0).getTextContent();
 		dataEmissao = dataEmissao.substring(0, 10);
 		LocalDate issuanceDate = LocalDate.parse(dataEmissao);
@@ -122,7 +119,6 @@ public class XmlServer {
 	public void deleteXml(File filePath) {
 		File file = filePath;
 		file.delete();
-		System.out.println("Arquivo Deletado...");
 	}
 
 	public void saveXml(String newPath, File filePath) throws Exception {

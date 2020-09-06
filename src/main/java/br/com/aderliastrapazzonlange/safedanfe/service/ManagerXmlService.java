@@ -31,13 +31,9 @@ public class ManagerXmlService {
 	public void start() {
 		while (true) {
 			
-			System.out.println("Interando no inicio Start... ");
-			System.out.println("diretorio a ser lido "+ AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathxml());
 			File rootPath = new File(AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathxml());
 			File[] paths = rootPath.listFiles();
-			System.out.println("antes do for " + paths.length);
 			if (paths.length == 0) {
-				System.out.println("Não exixtem mais arquivos para serem processados...");
 				break;
 			}
 			for (int i = 0; i < paths.length; i++) {
@@ -45,7 +41,6 @@ public class ManagerXmlService {
 				if (i > 50) {
 					break;
 				}
-				System.out.println("Diretorio do arquivo: " + paths[i]);
 
 				File path = paths[i];
 				XmlServer xmlServer = new XmlServer();
@@ -53,13 +48,10 @@ public class ManagerXmlService {
 					Document document = xmlServer.openXml(path);
 
 					Provider provider = xmlServer.providerXml(document, providerRepository);
-					System.out.println(provider.getName());
 					Company company = xmlServer.companyXml(document, companyRepository);
 					if (company.getId() == 0) {
-						System.out.println("Salvar arquivo em outros "+AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathother());
 						xmlServer.saveXml(AppWebConfiguration.getFilerootpath()+AppWebConfiguration.getFilepathother(), path);
 						xmlServer.deleteXml(path);
-						System.out.println("Não existe empresa cadastrada!!! ");
 						return;
 					}
 					Danfe danfe = xmlServer.danfeXml(document, provider, company);
@@ -73,17 +65,15 @@ public class ManagerXmlService {
 						xmlServer.saveXml(companyPath, filePath);
 						xmlServer.saveXml(bkpPath, filePath);
 						xmlServer.deleteXml(path);
-						System.out.println("Cadastrado com sucesso...");
 
 					} else {
 						xmlServer.deleteXml(path);
-						System.out.println("já existe no banco de dados...");
 
 					}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println("Catch 4 " + e.toString());
+					System.out.println(e.toString());
 					try {
 						System.out.println("salvando arquivo erro " +AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepatherror() + path.getName());
 						xmlServer.saveXml(AppWebConfiguration.getFilerootpath() + AppWebConfiguration.getFilepatherror() + path.getName(), path);
