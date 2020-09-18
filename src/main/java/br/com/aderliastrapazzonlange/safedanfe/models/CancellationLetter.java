@@ -1,20 +1,15 @@
 package br.com.aderliastrapazzonlange.safedanfe.models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,34 +22,27 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Danfe implements Serializable {
-
+public class CancellationLetter implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private long id;
-	@ManyToOne
-	@JoinColumn(name = "ID_COMPANY")
-	@NotNull
-	private Company company;
-	@ManyToOne
-	@JoinColumn(name = "ID_PROVIDER")
-	@NotNull
-	private Provider provider;
-	@Column(nullable = false, name = "NUMBER_NFE")
-	@NotNull
-	private Long numberNFE;
-	@Column(nullable = false, name = "KEY_NFE")
-	@NotEmpty
-	private String keyNFE;
-	@Column(nullable = false, name = "COMPANY")
-	@NotNull
-	private BigDecimal amount;
+	private Long id;
 	@OneToOne
-	@JoinColumn(name = "CANCELLATION_LETTER_ID")
-	private CancellationLetter cancellationLetter;
+	@JoinColumn(name = "DANFE_ID")
+	@NotNull
+	private Danfe danfe;
+	@Column(nullable = false, name = "EVENT")
+	@NotNull
+	private String event;
+	@Column(nullable = false, name = "JUSTIFICATION")
+	@NotNull
+	private String justification;
+	@Column(nullable = false, name = "TYPE_EVENT")
+	@NotNull
+	private Long typeEvent;
 	@Column(nullable = false, name = "ISSUANCE_DATE")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate issuanceDate;
@@ -62,8 +50,4 @@ public class Danfe implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate creationDate;
 	
-	@PrePersist
-	public void prePersist() {
-		setCreationDate(LocalDate.now());
-	}
 }

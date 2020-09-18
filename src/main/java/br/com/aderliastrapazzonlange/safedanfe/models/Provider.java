@@ -7,8 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Provider implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,64 +26,15 @@ public class Provider implements Serializable {
 	@Column(name = "ID")
 	private Long id;
 	@Column(nullable = false, name = "NAME")
+	@NotEmpty(message = "{name.required}")
 	private String name;
 	@Column(nullable = false, name = "CNPJ")
+	@NotEmpty(message = "{cnpj.required}")
 	private String cnpj;
 	@Column(nullable = false, name = "CITY")
+	@NotEmpty(message = "{city.required}")
 	private String city;
-	@Column(nullable = false, name = "ESTADO")
-	private String estado;
-
-	public Provider() {
-
-	}
-
-	public Provider(String name, String cnpj, String city, String municipio, String estado) {
-
-		this.name = name;
-		this.cnpj = cnpj;
-		this.city = city;
-		this.estado = estado;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	@Column(nullable = false, name = "STATE")
+	@NotEmpty(message = "{state.required}")
+	private String state;
 }

@@ -26,6 +26,9 @@ public class AppWebConfiguration {
 	public static String getFilepathbkp() {
 		return filePathBKP;
 	}
+	public static String getFilepatherror() {
+		return filePathError;
+	}
 	public static String getJpacontextual() {
 		return jpaContextual;
 	}
@@ -44,21 +47,7 @@ public class AppWebConfiguration {
 	public static String getJpaddlauto() {
 		return jpaDDLAuto;
 	}
-	public static String getFilepatherror() {
-		return filePathError;
-	}
-	
-	
-	
-	
 	 
-//	spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
-//
-//	#Banco Local
-//	spring.datasource.url=jdbc:mysql://localhost:3306/safedanfe
-//	spring.datasource.username=admin
-//	spring.datasource.password=toor
-//	spring.jpa.hibernate.ddl-auto=update
 
 	
 }

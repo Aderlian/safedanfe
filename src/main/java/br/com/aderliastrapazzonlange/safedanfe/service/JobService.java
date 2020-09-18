@@ -7,34 +7,24 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.aderliastrapazzonlange.safedanfe.repository.CompanyRepository;
-import br.com.aderliastrapazzonlange.safedanfe.repository.DanfeRepository;
-import br.com.aderliastrapazzonlange.safedanfe.repository.ProviderRepository;
-
 public class JobService implements Job {
 
-	private final ProviderRepository providerRepository;
-	private final CompanyRepository companyRepository;
-	private final DanfeRepository danfeRepository;
-
-	@Autowired
-	public JobService(ProviderRepository providerRepository, CompanyRepository companyRepository,
-			DanfeRepository danfeRepository) {
-		this.providerRepository = providerRepository;
-		this.companyRepository = companyRepository;
-		this.danfeRepository = danfeRepository;
-	}
-
 	LocalDateTime localDate = LocalDateTime.now();
+	XmlService xmlService;
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
+		
+		
 		System.out.println("--------------------------INICIO AS "+ LocalDateTime.now() +"-----------------------------------------------");
-		ManagerXmlService managerXmlService = new ManagerXmlService(providerRepository, companyRepository,
-				danfeRepository);
-		managerXmlService.start();
+
+		xmlService.readXml();
 		
 		System.out.println("--------------------------FIM AS "+ LocalDateTime.now() +"--------------------------------------------------");
+	}
+
+	public JobService(@Autowired XmlService xmlService) {
+		this.xmlService = xmlService;
 	}
 
 }

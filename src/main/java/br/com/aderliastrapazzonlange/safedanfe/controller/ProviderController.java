@@ -1,19 +1,25 @@
 package br.com.aderliastrapazzonlange.safedanfe.controller;
 
-import java.util.Optional;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.aderliastrapazzonlange.safedanfe.models.Provider;
 import br.com.aderliastrapazzonlange.safedanfe.repository.ProviderRepository;
 
-@Controller
+@RestController
 @RequestMapping("/providers")
 public class ProviderController {
 
@@ -23,42 +29,40 @@ public class ProviderController {
 	public ProviderController(ProviderRepository repository) {
 		this.repository = repository;
 	}
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Provider save(@RequestBody @Valid Provider provider) {
+		return repository.save(provider);
+	}
 
 	@GetMapping
-	public String ListProvider(Model model) {
-		Iterable<Provider> provider = repository.findAll();
-
-		model.addAttribute("providerAll", provider);
-
-		return "ListProvider";
+	public List<Provider> ListCompany() {
+		return repository.findAll();
 	}
-
-	@GetMapping("/form")
-	public String CreateProviderForm(Model model) {
-		model.addAttribute("providerID", new Provider());
-		return "FormProvider";
-	}
-
-	@PostMapping
-	public String SaveProvider(Provider provider) {
-		repository.save(provider);
-
-		return "redirect:/providers";
-
-	}
-
+	
 	@GetMapping("{id}")
-	public String searchId(@PathVariable Long id, Model model) {
-		Optional<Provider> provider = repository.findById(id);
-		model.addAttribute("providerID", provider.get());
-		return "FormProvider";
+	public Provider searchId(@PathVariable Long id) {
+		
+		return repository
+				.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrada.")); 
 	}
-
-	@GetMapping("/delete/{id}")
-	public String deleteProvider(@PathVariable Long id) {
-		Provider provider = repository.findById(id).get();
-		repository.deleteById(provider.getId());
-		return "redirect:/providers";
+	
+	@PutMapping("{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void update(@PathVariable Long id, @RequestBody @Valid Provider updatedProvider) {
+		repository
+		.findById(id)
+		.map(provider -> {
+			updatedProvider.setId(provider.getId());
+			return repository.save(updatedProvider);
+		})
+		
+		.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrada."));
 	}
+	
+	
+	
 
 }
