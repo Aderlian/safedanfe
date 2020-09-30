@@ -3,7 +3,6 @@ package br.com.aderliastrapazzonlange.safedanfe;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
