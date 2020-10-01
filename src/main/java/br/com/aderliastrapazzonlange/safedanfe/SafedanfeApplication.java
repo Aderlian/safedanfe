@@ -33,6 +33,7 @@ public class SafedanfeApplication {
 		
 	}
 	
+	/**
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -42,8 +43,9 @@ public class SafedanfeApplication {
 		dataSource.setPassword(AppWebConfiguration.getJpapassword());
 		return dataSource;
 		
+		
 	}
-	
+	**/
 	
 
 }
