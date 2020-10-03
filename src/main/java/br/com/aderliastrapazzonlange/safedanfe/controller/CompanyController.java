@@ -23,7 +23,7 @@ import br.com.aderliastrapazzonlange.safedanfe.repository.CompanyRepository;
 
 @RestController
 @RequestMapping("/companys")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class CompanyController {
 	
 	private final CompanyRepository repository;
