@@ -19,7 +19,6 @@ public class SafedanfeApplication {
 	public CommandLineRunner run(@Autowired XmlService xmlService) {
 		return args -> {
 			System.out.println("executando run");
-			
 			xmlService.readXml();
 			
 			

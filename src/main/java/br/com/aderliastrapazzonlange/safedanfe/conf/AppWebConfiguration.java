@@ -2,7 +2,7 @@ package br.com.aderliastrapazzonlange.safedanfe.conf;
 
 public class AppWebConfiguration {
 	
-	private static final String fileRootPath = "/home/aderlian/Downloads/XML/";
+	private static final String fileRootPath = System.getProperty("user.dir") + "/src/main/resources/XML/";
 	private static final String filePathXML = "origem/";
 	private static final String filePathOther = "xmlOther/";
 	private static final String filePathBKP = "xmlBKP/";

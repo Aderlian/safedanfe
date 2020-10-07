@@ -49,7 +49,7 @@ public class Danfe implements Serializable {
 	@Column(nullable = false, name = "KEY_NFE")
 	@NotEmpty
 	private String keyNFE;
-	@Column(nullable = false, name = "COMPANY")
+	@Column(nullable = false, name = "AMOUNT")
 	@NotNull
 	private BigDecimal amount;
 	@OneToOne
