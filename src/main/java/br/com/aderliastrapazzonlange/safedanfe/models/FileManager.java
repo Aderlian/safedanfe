@@ -1,138 +1,101 @@
 package br.com.aderliastrapazzonlange.safedanfe.models;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
+/**
+ * 
+ * Essa classe estatica é responsavel por manipular os arquivos de dados.
+ * This class static is responsible for manipulate file data.
+ * 
+ * @author Aderlian Strapazzon Lange
+ *
+ */
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@Component
 public class FileManager {
-
-	private File[] paths;
-
-	public void deleteXml(File file) {
-		System.out.println("Deletando o arquivo:" + file);
-		file.delete();
+/**
+ * Crie uma nova instância de arquivo usando o caminho
+ * Create a new instance of file using path 
+ * 
+ * @param path caminho absoluto do arquivo, inclua seu nome e extensão, exemplo: "/home/file1.xml"
+ * @param path path absolute of file, include your name and extension, example: "/home/file1.xml"
+ * @return nova instancia do arquivo.
+ * @return new instance of File.
+ * @see java.io.File
+ * 
+ */
+	public static File openFile(String path) {
+		File file = new File(path);
+		return file;
 	}
-
-	public void saveXml(String newPath, File file) {
-		InputStream fileIn = null;
-		OutputStream fileFor = null;
-
+/**
+ * Grava o arquivo de memória em um novo caminho.
+ * Writes memory file in new path.  
+ * 
+ * @param file objeto na memória representa um arquivo.
+ * @param file object in memory represents a file.
+ * @param newWay novo diretório para gravação, inclua seu nome e extensão, exemplo: "/home/file1.xml".
+ * @param newWay new directory for write, include your name and extension, example: "/home/file1.xml".
+ */
+	public static void saveFile(File file, String newWay){
 		try {
-			fileIn = new FileInputStream(file);
-			fileFor = new FileOutputStream(newPath);
+			InputStream fileIn = new FileInputStream(file);
+			OutputStream fileFor = new FileOutputStream(newWay);
 			byte[] buf = new byte[1024];
 			int len;
 			while ((len = fileIn.read(buf)) > 0) {
 				fileFor.write(buf, 0, len);
 			}
-			System.out.println("Salvando o arquivo:" + file + " no diretorio: " + newPath);
+			fileIn.close();
+			fileFor.close();
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			if (fileIn != null) {
-				try {
-					fileIn.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (fileFor != null) {
-				try {
-					fileFor.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	public void readDirector(String path) {
-		File rootPath = new File(path);
-		paths = rootPath.listFiles();
-	}
-
-	public boolean xmlCheck(File file) {
-		boolean result = false;
-		String name = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-		name = name.toLowerCase();
-
-		if (name.equals("xml")) {
-			System.out.println("entrou no if da igualdade xml");
-			fileProcess(file);
-
-			result = true;
-		}
-
-		return result;
-	}
-
-	private void fileProcess(File file) {
-
-		BufferedReader br;
-		Boolean modified = false;
-		String textUpdating = "";
-		try {
-			br = new BufferedReader(new FileReader(file));
-			StringBuilder linha = new StringBuilder();
-
-			while (br.ready()) {
-
-				linha.append(br.readLine());
-				if (br.ready()) {
-					linha.append("\n");
-				}
-			}
-			if (linha.toString().indexOf("&") != -1 && linha.toString().indexOf("&amp;") == -1) {
-				textUpdating = linha.toString().replaceAll("&", "&amp;");
-				modified = true;
-			} else {
-				System.out.println("arquivo não tem &");
-			}
-			br.close();
-			
-			if(modified) {
-				updatingFile(file,textUpdating);
-			}
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-	}
-
-	private void updatingFile(File file, String textUpdating) {
-		
-		try {
-			FileWriter fileWriter = new FileWriter(file);
-			PrintWriter printWriter = new PrintWriter(fileWriter);
-			printWriter.printf("%s",textUpdating);
-			printWriter.close();
-			
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
-
+/**
+ * Remove o arquivo.
+ * Remove file.
+ * @param file objeto na memória representa um arquivo.
+ * @param file object in memory represents a file.
+ */
+	public static void deleteFile(File file) {
+		file.delete();		
+	}
+/**
+ * ler o diretório e listar todos os arquivos existentes.
+ * read directory and list all files existents.
+ * @param dir diretório principal de arquivos.
+ * @param dir directory main from files.
+ * @return lista de caminho de arquivo.
+ * @return list file path.
+ */
+	public static List<String> readDirector(File dir) {
+		File[] files;
+		if(dir == null) {
+			return null;
+		}
+		files = dir.listFiles();
+		List<String> listFiles = new ArrayList<String>();
+		if(files == null || files.length == 0) {
+			return null;
+		}
+		for(int i = 0; i < files.length; i++) {
+			listFiles.add(files[i].getAbsolutePath());
+		}
+		return listFiles;
+	}
 }

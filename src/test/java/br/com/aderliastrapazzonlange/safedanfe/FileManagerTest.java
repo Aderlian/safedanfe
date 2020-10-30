@@ -3,87 +3,53 @@ package br.com.aderliastrapazzonlange.safedanfe;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.aderliastrapazzonlange.safedanfe.models.FileManager;
 
+@SpringBootTest
 @RunWith(SpringRunner.class)
 public class FileManagerTest {
-
-	private FileManager fileManager = new FileManager();
-	private File dir;
-
-	public FileManagerTest() {
-
-	}
-
-	@Before
-	public void prepare() {
-		dir = new File("/home/aderlian/Downloads/test-data");
-		dir.mkdirs();
-	}
-
-	@After
-	public void clean() {
-
-		if (dir.listFiles() != null) {
-			for (File f : dir.listFiles()) {
-				f.delete();
-			}
-		}
-
-		dir.delete();
-	}
-
+	String path = "/home/aderlian/Downloads/XML/teste.xml";
+	File file = FileManager.openFile(path);
+	File file2;
+	
 	@Test
-	public void deleteExistingFile() throws Exception {
-
-		// scenario
-		new File(dir, "teste.xml").createNewFile();
-		File[] files = dir.listFiles();
-
-		// action
-		fileManager.deleteXml(files[0]);
-		files = dir.listFiles();
-
-		// validation
-		assertEquals(0, files.length);
+	public void openFileTest() {
+		assertEquals(true, file.exists());
 	}
-
 	@Test
-	public void saveFile() throws Exception {
-
-		// scenario
-		new File(dir, "teste.xml").createNewFile();
-		File[] files = dir.listFiles();
-
-		// action
-		fileManager.saveXml("/home/aderlian/Downloads/test-data/teste1.xml", files[0]);
-		files = dir.listFiles();
-
-		// validation
-		assertEquals(2, dir.listFiles().length);
-		assertEquals("teste.xml", files[0].getName());
-		assertEquals("teste1.xml", files[1].getName());
+	public void saveFileTest() {
+		String newWay = "/home/aderlian/Downloads/XML/teste2.xml";
+		FileManager.saveFile(file, newWay);
+		File file2 = FileManager.openFile(newWay);
+		assertEquals(true, file.exists());
+		assertEquals(true, file2.exists());
 	}
-
 	@Test
-	public void readDirector() throws Exception {
-		// scenario
-		new File(dir, "teste.xml").createNewFile();
-		new File(dir, "teste1.xml").createNewFile();
-		new File(dir, "teste2.xml").createNewFile();
-
-		// action
-		fileManager.readDirector("/home/aderlian/Downloads/test-data");
+	public void deleteFileTest() {
+		file2 = FileManager.openFile("/home/aderlian/Downloads/XML/teste2.xml");
+		assertEquals(true, file2.exists());
+		FileManager.deleteFile(file2);
+		assertEquals(false, file2.exists());
+	}
+	@Test
+	public void readDirectorTest() {
+		File fileA = FileManager.openFile("/home/aderlian/Downloads/XML/");
+		List listA = FileManager.readDirector(fileA);
+		File fileB = FileManager.openFile("/home/aderlian/Downloads/XML/error/");
+		List listB = FileManager.readDirector(fileB);
+		File fileC = null;
+		List listC = FileManager.readDirector(fileC);
 		
-
-		// validation
-		assertEquals(3, fileManager.getPaths().length);
+		assertEquals(true, listA.size() > 0);
+		assertEquals(null, listB);
+		assertEquals(null, listC);
+		
 	}
 }

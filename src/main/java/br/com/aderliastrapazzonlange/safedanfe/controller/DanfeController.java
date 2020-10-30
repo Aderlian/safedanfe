@@ -2,16 +2,10 @@ package br.com.aderliastrapazzonlange.safedanfe.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.util.List;
 
-import javax.print.Doc;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.sun.net.httpserver.Headers;
 
 import br.com.aderliastrapazzonlange.safedanfe.conf.AppWebConfiguration;
 import br.com.aderliastrapazzonlange.safedanfe.models.Danfe;
 import br.com.aderliastrapazzonlange.safedanfe.models.FileManager;
+import br.com.aderliastrapazzonlange.safedanfe.models.FileManagerOld;
 import br.com.aderliastrapazzonlange.safedanfe.repository.DanfeRepository;
 
 @RestController
@@ -36,10 +28,10 @@ import br.com.aderliastrapazzonlange.safedanfe.repository.DanfeRepository;
 public class DanfeController {
 
 	private final DanfeRepository repository;
-	private final FileManager file;
+	private final FileManagerOld file;
 	
 	@Autowired
-	public DanfeController(DanfeRepository repository, FileManager file) {
+	public DanfeController(DanfeRepository repository, FileManagerOld file) {
 		this.repository = repository;
 		this.file = file;
 	}
